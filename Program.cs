@@ -44,7 +44,7 @@ void PrepareParallelCountingSort(int[] inputArray)
         for (int j = 0; j < counters[i]; j++)
         {
             inputArray[index] = i - offset;
-            index++;   
+            index++;
         }
     }
 }
@@ -53,7 +53,10 @@ void CountingSortParallel(int[] inputArray, int[] counters, int offset, int star
 {
     for (int i = startPos; i < endPos; i++)
     {
-        counters[inputArray[i] + offset]++;
+        lock (locker)
+        {
+            counters[inputArray[i] + offset]++;
+        }
     }
 
 }
@@ -78,7 +81,7 @@ void CountingSortExtended(int[] inputArray)
         for (int j = 0; j < counters[i]; j++)
         {
             inputArray[index] = i - offset;
-            index++;   
+            index++;
         }
     }
 }
